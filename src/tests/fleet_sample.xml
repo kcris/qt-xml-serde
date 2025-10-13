@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fleet xmlns="http://example.com/vehicle">
+    <name>Corporate Fleet 2024</name>
+    
+    <!-- Regular vehicle -->
+    <vehicle id="V001">
+        <licensePlate>ABC-1234</licensePlate>
+        <year>2020</year>
+        <manufacturer>Generic Motors</manufacturer>
+    </vehicle>
+    
+    <!-- Car (substitutes vehicle element) -->
+    <car id="C001">
+        <licensePlate>XYZ-5678</licensePlate>
+        <year>2022</year>
+        <manufacturer>Luxury Cars Inc</manufacturer>
+        <numDoors>4</numDoors>
+        <trunkCapacity>450.5</trunkCapacity>
+    </car>
+    
+    <!-- Another car -->
+    <car id="C002">
+        <licensePlate>DEF-9012</licensePlate>
+        <year>2023</year>
+        <manufacturer>Sport Cars Ltd</manufacturer>
+        <numDoors>2</numDoors>
+        <trunkCapacity>200.0</trunkCapacity>
+    </car>
+    
+    <!-- Truck (substitutes vehicle element) -->
+    <truck id="T001">
+        <licensePlate>TRK-3456</licensePlate>
+        <year>2021</year>
+        <manufacturer>Heavy Haulers</manufacturer>
+        <payloadCapacity>5000.0</payloadCapacity>
+        <numAxles>3</numAxles>
+    </truck>
+    
+    <!-- Motorcycle (substitutes vehicle element) -->
+    <motorcycle id="M001">
+        <licensePlate>MCY-7890</licensePlate>
+        <year>2023</year>
+        <manufacturer>Speed Bikes</manufacturer>
+        <engineCC>1200</engineCC>
+        <hasSidecar>false</hasSidecar>
+    </motorcycle>
+    
+    <!-- Using xsi:type instead of substitution -->
+    <vehicle id="C003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xsi:type="CarType">
+        <licensePlate>ALT-1111</licensePlate>
+        <year>2024</year>
+        <manufacturer>Alternative Cars</manufacturer>
+        <numDoors>5</numDoors>
+        <trunkCapacity>600.0</trunkCapacity>
+    </vehicle>
+</fleet>
