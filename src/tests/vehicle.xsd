@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://example.com/vehicle"
+           xmlns:tns="http://example.com/vehicle"
+           elementFormDefault="qualified">
+
+    <!-- Base Vehicle Type -->
+    <xs:complexType name="VehicleType">
+        <xs:sequence>
+            <xs:element name="licensePlate" type="xs:string"/>
+            <xs:element name="year" type="xs:int"/>
+            <xs:element name="manufacturer" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="id" type="xs:string" use="required"/>
+    </xs:complexType>
+
+    <!-- Car Type (extends Vehicle) -->
+    <xs:complexType name="CarType">
+        <xs:complexContent>
+            <xs:extension base="tns:VehicleType">
+                <xs:sequence>
+                    <xs:element name="numDoors" type="xs:int"/>
+                    <xs:element name="trunkCapacity" type="xs:double"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Truck Type (extends Vehicle) -->
+    <xs:complexType name="TruckType">
+        <xs:complexContent>
+            <xs:extension base="tns:VehicleType">
+                <xs:sequence>
+                    <xs:element name="payloadCapacity" type="xs:double"/>
+                    <xs:element name="numAxles" type="xs:int"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Motorcycle Type (extends Vehicle) -->
+    <xs:complexType name="MotorcycleType">
+        <xs:complexContent>
+            <xs:extension base="tns:VehicleType">
+                <xs:sequence>
+                    <xs:element name="engineCC" type="xs:int"/>
+                    <xs:element name="hasSidecar" type="xs:boolean"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <!-- Element declarations with substitution group -->
+    <xs:element name="vehicle" type="tns:VehicleType"/>
+    <xs:element name="car" type="tns:CarType" substitutionGroup="tns:vehicle"/>
+    <xs:element name="truck" type="tns:TruckType" substitutionGroup="tns:vehicle"/>
+    <xs:element name="motorcycle" type="tns:MotorcycleType" substitutionGroup="tns:vehicle"/>
+
+    <!-- Fleet Type (collection of vehicles) -->
+    <xs:complexType name="FleetType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element ref="tns:vehicle" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:element name="fleet" type="tns:FleetType"/>
+
+</xs:schema>
